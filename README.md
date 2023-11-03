@@ -1,3 +1,5 @@
 This project is a software synthesizer that runs as a desktop app. The audio output and midi input are handled using the RtAudio and RtMidi libraries, and the graphical user interface is built from scratch using OpenGL with GLFW for windowing.
 
-The project is written in C++ and there is some GLSL for the GUI. The GLSL files are written with the vertex and fragment shaders combined into a single file, which are combined with an additional shared section before begin separated and sent to the graphics hardware.
+The project is written in C++ and there is some GLSL for the GUI. The GLSL files are written with the vertex and fragment shaders combined into a single file. Each part is separated, combined with an additional shared section of the file, compiled, and linked back together to make the complete shader program.
+
+Dependency between the audio code and GUI code is made to be as minimal as possible. This is achieved by using a Control class that represents an audio parameter and GUI control. Each part of the software can update and listen for updates on the controls and this is their only point of contact, enabling the audio engine to use the control values, midi inputs to update the control values, and the GUI to display and change the control values, all while remaining invisible to each other.
